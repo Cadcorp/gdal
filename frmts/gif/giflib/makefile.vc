@@ -10,6 +10,9 @@ EXTRAFLAGS =	$(SOFTWARNFLAGS) -DHAVE_STDINT_H -DHAVE_INTTYPES_H
 
 default:	$(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:giflib.lib $(OBJ)
+# Cadcorp
 
 clean:
 	-del *.obj

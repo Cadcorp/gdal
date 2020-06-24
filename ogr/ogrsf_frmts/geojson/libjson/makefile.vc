@@ -24,6 +24,9 @@ GDAL_ROOT	=	..\..\..\..
 EXTRAFLAGS =	-I.. -I..\.. -I..\..\.. $(SOFTWARNFLAGS) /wd4306
 
 default:	$(OBJ)
+# Cadcorp
+	lib /out:libjson.lib $(OBJ)
+# Cadcorp
 
 clean:
 	-del *.lib
