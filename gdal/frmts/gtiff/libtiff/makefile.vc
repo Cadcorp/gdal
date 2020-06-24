@@ -91,6 +91,9 @@ LIBDEFLATE_FLAGS =	$(LIBDEFLATE_CFLAGS) -DLIBDEFLATE_SUPPORT
 
 default:	$(EXTRA_DEP) $(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:libtiff.lib $(OBJ)
+# Cadcorp
 
 clean:
 	del *.obj
