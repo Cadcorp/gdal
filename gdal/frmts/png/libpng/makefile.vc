@@ -33,6 +33,9 @@ EXTRAFLAGS = 	$(ZLIB_FLAGS) /wd4267 /wd4310
 
 default:	$(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:libpng.lib $(OBJ)
+# Cadcorp
 
 libpng.lib:	$(OBJ)
 	LIB /OUT:libpng.lib $(OBJ)
