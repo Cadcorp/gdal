@@ -18,6 +18,9 @@ EXTRAFLAGS      = $(SOFTWARNFLAGS)
 
 default:	jcapimin12.c $(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:libjpeg12.lib $(OBJ)
+# Cadcorp
 
 jcapimin12.c:	../libjpeg/jcapimin.c
 	xcopy /Y ..\libjpeg\*.h

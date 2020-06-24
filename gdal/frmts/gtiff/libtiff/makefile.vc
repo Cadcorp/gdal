@@ -98,6 +98,9 @@ LERC_FLAGS = -DLERC_SUPPORT $(LERC_INCLUDE)
 
 default:	$(EXTRA_DEP) $(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:libtiff.lib $(OBJ)
+# Cadcorp
 
 clean:
 	del *.obj

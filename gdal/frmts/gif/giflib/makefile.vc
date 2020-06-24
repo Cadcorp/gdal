@@ -10,6 +10,9 @@ EXTRAFLAGS =	$(SOFTWARNFLAGS)
 
 default:	$(OBJ)
 	xcopy /D  /Y *.obj ..\..\o
+# Cadcorp
+	lib /out:giflib.lib $(OBJ)
+# Cadcorp
 
 clean:
 	-del *.obj

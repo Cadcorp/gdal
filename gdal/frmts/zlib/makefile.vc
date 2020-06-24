@@ -24,6 +24,9 @@ EXTRAFLAGS = $(SOFTWARNFLAGS) -Dverbose=-1 /wd4131
 
 default:	$(OBJ)
 	xcopy /D  /Y *.obj ..\o
+# Cadcorp
+    lib /out:zlib.lib $(OBJ)
+# Cadcorp
 
 clean:
 	-del *.obj

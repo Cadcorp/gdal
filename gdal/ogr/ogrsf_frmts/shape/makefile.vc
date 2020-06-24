@@ -10,6 +10,9 @@ GDAL_ROOT	=	..\..\..
 !INCLUDE $(GDAL_ROOT)\nmake.opt
 
 default:	$(OBJ)
+# Cadcorp
+	lib /out:shptreelib.lib shpopen.obj shptree.obj shp_vsi.obj sbnsearch.obj
+# Cadcorp
 
 clean:
 	-del *.obj *.pdb
