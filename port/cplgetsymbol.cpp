@@ -152,12 +152,29 @@ void *CPLGetSymbol(const char *pszLibrary, const char *pszSymbolName)
         wchar_t *pwszFilename =
             CPLRecodeToWChar(pszLibrary, CPL_ENC_UTF8, CPL_ENC_UCS2);
         pLibrary = LoadLibraryW(pwszFilename);
+
+        // Cadcorp
+        if (pLibrary <= (void*)HINSTANCE_ERROR)
+        {
+            // Retry with altered search path, ie use the same folder as pszLibrary
+            pLibrary = LoadLibraryExW(pwszFilename, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+        }
+        // Cadcorp
+
         CPLFree(pwszFilename);
     }
     else
 #endif
     {
         pLibrary = LoadLibraryA(pszLibrary);
+
+        // Cadcorp
+        if (pLibrary <= (void*)HINSTANCE_ERROR)
+        {
+            // Retry with altered search path, ie use the same folder as pszLibrary
+            pLibrary = LoadLibraryEx(pszLibrary, nullptr, LOAD_WITH_ALTERED_SEARCH_PATH);
+        }
+        // Cadcorp
     }
 
     if (pLibrary <= (void *)HINSTANCE_ERROR)
