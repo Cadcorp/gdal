@@ -260,11 +260,15 @@ static OGRErr GDALGPKGImportFromEPSG(OGRSpatialReference *poSpatialRef,
 
 OGRSpatialReference* GDALGeoPackageDataset::GetSpatialRef(int iSrsId)
 {
+// Cadcorp
     /* Should we do something special with undefined SRS ? */
+/*
     if( iSrsId == 0 || iSrsId == -1 )
     {
         return nullptr;
     }
+*/
+// Cadcorp
 
     std::map<int, OGRSpatialReference*>::const_iterator oIter =
                                                 m_oMapSrsIdToSrs.find(iSrsId);
@@ -275,6 +279,31 @@ OGRSpatialReference* GDALGeoPackageDataset::GetSpatialRef(int iSrsId)
         oIter->second->Reference();
         return oIter->second;
     }
+
+// Cadcorp
+    if( iSrsId == 0 || iSrsId == -1 )
+    {
+        OGRSpatialReference *poSpatialRef = new OGRSpatialReference();
+
+        if( iSrsId == 0)
+        {
+            poSpatialRef->SetGeogCS("Undefined geographic SRS",
+                                    "unknown",
+                                    "unknown",
+                                    SRS_WGS84_SEMIMAJOR,
+                                    SRS_WGS84_INVFLATTENING);
+        }
+        else if( iSrsId == -1)
+        {
+            poSpatialRef->SetLocalCS("Undefined cartesian SRS");
+            poSpatialRef->SetLinearUnits( SRS_UL_METER, 1.0 );
+        }
+
+        m_oMapSrsIdToSrs[iSrsId] = poSpatialRef;
+        poSpatialRef->Reference();
+        return poSpatialRef;
+    }
+// Cadcorp
 
     CPLString oSQL;
     oSQL.Printf( "SELECT definition, organization, organization_coordsys_id%s "
@@ -1727,7 +1756,7 @@ bool GDALGeoPackageDataset::ComputeTileAndPixelShifts()
     GetRasterBand(1)->GetBlockSize(&nTileWidth, &nTileHeight);
 
     // Compute shift between GDAL origin and TileMatrixSet origin
-    double dfShiftXPixels = (m_adfGeoTransform[0] - m_dfTMSMinX) / 
+    double dfShiftXPixels = (m_adfGeoTransform[0] - m_dfTMSMinX) /
                                                         m_adfGeoTransform[1];
     if( dfShiftXPixels < INT_MIN || dfShiftXPixels + 0.5 > INT_MAX )
         return false;
@@ -2157,7 +2186,7 @@ bool GDALGeoPackageDataset::OpenRaster( const char* pszTableName,
         sqlite3_free(pszSQL);
         if  ( err != OGRERR_NONE || oResult2.nRowCount == 0 ||
                 // Can happen if table is empty
-              SQLResultGetValue(&oResult2, 0, 0) == nullptr || 
+              SQLResultGetValue(&oResult2, 0, 0) == nullptr ||
                 // Can happen if table has no NOT NULL constraint on tile_row
                 // and that all tile_row are NULL
               SQLResultGetValue(&oResult2, 1, 0) == nullptr  )
@@ -3978,7 +4007,7 @@ int GDALGeoPackageDataset::Create( const char * pszFilename,
             m_bHasDefinition12_063 = true;
             osSQL += ", definition_12_063 TEXT NOT NULL";
         }
-        osSQL += 
+        osSQL +=
             ")"
             ";"
         /* Requirement 11: The gpkg_spatial_ref_sys table in a GeoPackage SHALL */
@@ -4052,7 +4081,7 @@ int GDALGeoPackageDataset::Create( const char * pszFilename,
         if( CPLFetchBool(papszOptions, "ADD_GPKG_OGR_CONTENTS", true) )
         {
             m_bHasGPKGOGRContents = true;
-            osSQL += 
+            osSQL +=
                 ";"
                 "CREATE TABLE gpkg_ogr_contents("
                 "table_name TEXT NOT NULL PRIMARY KEY,"
@@ -4600,7 +4629,7 @@ bool GDALGeoPackageDataset::CreateTileGriddedTable(char** papszOptions)
                                                       "PRECISION", "1"));
     CPLString osGridCellEncoding(CSLFetchNameValueDef(
                 papszOptions, "GRID_CELL_ENCODING", "grid-value-is-center"));
-    m_bGridCellEncodingAsCO = 
+    m_bGridCellEncodingAsCO =
         CSLFetchNameValue(papszOptions, "GRID_CELL_ENCODING") != nullptr;
     CPLString osUom(CSLFetchNameValueDef(papszOptions, "UOM", ""));
     CPLString osFieldName(
@@ -5602,7 +5631,7 @@ OGRErr GDALGeoPackageDataset::DeleteRasterLayer( const char* pszLayerName )
     {
         SoftRollbackTransaction();
     }
-    
+
     return eErr;
 }
 
