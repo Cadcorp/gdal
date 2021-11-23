@@ -1,4 +1,6 @@
 
+GDAL_ROOT	=	..\..\..
+
 OBJ	= \
 	tif_aux.obj \
 	tif_close.obj \
@@ -40,9 +42,12 @@ OBJ	= \
 	tif_lzma.obj \
 	tif_zstd.obj \
 	tif_webp.obj \
-	tif_lerc.obj
-
-GDAL_ROOT	=	..\..\..
+	tif_lerc.obj \
+	$(GDAL_ROOT)\third_party\o\BitMask.obj \
+	$(GDAL_ROOT)\third_party\o\BitStuffer2.obj \
+	$(GDAL_ROOT)\third_party\o\Huffman.obj \
+	$(GDAL_ROOT)\third_party\o\Lerc*.obj \
+	$(GDAL_ROOT)\third_party\o\RLE.obj
 
 # /wd4324 silents warning C4324: '<unnamed-tag>' : structure was padded due to __declspec(align())
 # in tif_jpeg.c:147 and tif_ojpeg.c:248
