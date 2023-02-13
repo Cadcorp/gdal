@@ -6149,6 +6149,24 @@ int PDFDataset::ParseProjDict(GDALPDFDictionary *poProjDict)
                     }
                 }
             }
+            // Cadcorp
+            else if (STARTS_WITH_CI(pszDatum, "EUR-")) /* EUROPEAN 1950 */
+            {
+                oSRS.importFromEPSG(4230);
+            }
+            else if (EQUAL(pszDatum, "IRE")) /* IRELAND 1965 */
+            {
+                oSRS.importFromEPSG(4299);
+            }
+            else if (STARTS_WITH_CI(pszDatum, "OGB-")) /* ORDNANCE GB 1936 */
+            {
+                oSRS.importFromEPSG(4277);
+            }
+            else if (EQUAL(pszDatum, "TOY-A") || EQUAL(pszDatum, "TOY-M")) /* TOKYO, Japan and TOKYO, Mean */
+            {
+                oSRS.importFromEPSG(4301);
+            }
+            // Cadcorp
             else
             {
                 CPLError(CE_Warning, CPLE_AppDefined,
