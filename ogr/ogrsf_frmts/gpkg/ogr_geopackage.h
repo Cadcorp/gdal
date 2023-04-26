@@ -1036,6 +1036,9 @@ class OGRGeoPackageTableLayer final : public OGRGeoPackageLayer
     void UpdateContentsToNullExtent();
 
     void CheckUnknownExtensions();
+// Cadcorp
+  public:
+// Cadcorp
     bool CreateGeometryExtensionIfNecessary(const OGRGeometry *poGeom);
 };
 
