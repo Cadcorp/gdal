@@ -623,6 +623,9 @@ class OGRGeoPackageTableLayer final : public OGRGeoPackageLayer
 
     void                CheckUnknownExtensions();
     bool                CreateGeometryExtensionIfNecessary(const OGRGeometry* poGeom);
+// Cadcorp
+  public:
+// Cadcorp
     bool                CreateGeometryExtensionIfNecessary(OGRwkbGeometryType eGType);
 };
 
