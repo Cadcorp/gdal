@@ -76,7 +76,7 @@ typedef enum
  * be available for any type of MapInfo dataset.
  *--------------------------------------------------------------------*/
 
-class IMapInfoFile CPL_NON_FINAL : public OGRLayer
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ IMapInfoFile CPL_NON_FINAL : public OGRLayer
 {
     CPL_DISALLOW_COPY_ASSIGN(IMapInfoFile)
 
@@ -214,7 +214,7 @@ class IMapInfoFile CPL_NON_FINAL : public OGRLayer
  * class to open a TAB dataset and read/write features from/to it.
  *
  *--------------------------------------------------------------------*/
-class TABFile final : public IMapInfoFile
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABFile final : public IMapInfoFile
 {
     CPL_DISALLOW_COPY_ASSIGN(TABFile)
 
@@ -979,7 +979,7 @@ typedef enum TABCustSymbStyle_t  // Can be OR'ed
   Base classes to be used to add supported drawing tools to each feature type
  =====================================================================*/
 
-class ITABFeaturePen
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ ITABFeaturePen
 {
   protected:
     int m_nPenDefIndex;
@@ -1098,7 +1098,7 @@ class ITABFeatureBrush
     void DumpBrushDef(FILE *fpOut = nullptr);
 };
 
-class ITABFeatureFont
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ ITABFeatureFont
 {
   protected:
     int m_nFontDefIndex;
@@ -1208,7 +1208,7 @@ class ITABFeatureSymbol
  * The logic to read/write the object from/to the .DAT and .MAP files is also
  * implemented as part of this class and derived classes.
  *--------------------------------------------------------------------*/
-class TABFeature : public OGRFeature
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABFeature : public OGRFeature
 {
   protected:
     TABGeomType m_nMapInfoType;
@@ -1326,7 +1326,7 @@ class TABFeature : public OGRFeature
  * NOTE: This class is also used as a base class for the other point
  * symbol types TABFontPoint and TABCustomPoint.
  *--------------------------------------------------------------------*/
-class TABPoint : public TABFeature, public ITABFeatureSymbol
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABPoint : public TABFeature, public ITABFeatureSymbol
 {
     CPL_DISALLOW_COPY_ASSIGN(TABPoint)
 
@@ -1519,7 +1519,7 @@ class TABCustomPoint final : public TABPoint, public ITABFeatureFont
  *
  * Feature geometry can be either a OGRLineString or a OGRMultiLineString
  *--------------------------------------------------------------------*/
-class TABPolyline final : public TABFeature, public ITABFeaturePen
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABPolyline final : public TABFeature, public ITABFeaturePen
 {
   private:
     GBool m_bCenterIsSet;
@@ -1591,7 +1591,7 @@ class TABPolyline final : public TABFeature, public ITABFeaturePen
  * inside MapInfo files.  However, when writing features, OGRPolygons with
  * multiple rings will be accepted without problem.
  *--------------------------------------------------------------------*/
-class TABRegion final : public TABFeature,
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABRegion final : public TABFeature,
                         public ITABFeaturePen,
                         public ITABFeatureBrush
 {
@@ -1862,7 +1862,7 @@ class TABArc final : public TABFeature, public ITABFeaturePen
  * are required in a valid text feature and MUST be set.
  * Text angle and other styles are optional.
  *--------------------------------------------------------------------*/
-class TABText final : public TABFeature,
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABText final : public TABFeature,
                       public ITABFeatureFont,
                       public ITABFeaturePen
 {
@@ -1983,7 +1983,7 @@ class TABText final : public TABFeature,
  * The symbol number is in the range [31..67], with 31=None and corresponds
  * to one of the 35 predefined "Old MapInfo Symbols"
  *--------------------------------------------------------------------*/
-class TABMultiPoint final : public TABFeature, public ITABFeatureSymbol
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABMultiPoint final : public TABFeature, public ITABFeatureSymbol
 {
   private:
     // We call it center, but it is more like a label point
@@ -2053,7 +2053,7 @@ class TABMultiPoint final : public TABFeature, public ITABFeatureSymbol
  * unless OGRFeature::SetGeometry*() are made virtual in OGR.
  *
  *--------------------------------------------------------------------*/
-class TABCollection final : public TABFeature, public ITABFeatureSymbol
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ TABCollection final : public TABFeature, public ITABFeatureSymbol
 {
     CPL_DISALLOW_COPY_ASSIGN(TABCollection)
 

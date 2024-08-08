@@ -108,7 +108,7 @@ typedef enum
     SPI_INVALID,
 } SPIState;
 
-class OGROpenFileGDBLayer final : public OGRLayer
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ OGROpenFileGDBLayer final : public OGRLayer
 {
     friend class OGROpenFileGDBGeomFieldDefn;
     friend class OGROpenFileGDBFeatureDefn;

@@ -605,7 +605,7 @@ class OGRGeoPackageLayer CPL_NON_FINAL : public OGRLayer,
 struct OGRGPKGTableLayerFillArrowArray;
 struct sqlite_rtree_bl;
 
-class OGRGeoPackageTableLayer final : public OGRGeoPackageLayer
+class /* Cadcorp */ CPL_DLL /* Cadcorp */ OGRGeoPackageTableLayer final : public OGRGeoPackageLayer
 {
     char *m_pszTableName = nullptr;
     bool m_bIsTable = true;  // sensible init for creation mode

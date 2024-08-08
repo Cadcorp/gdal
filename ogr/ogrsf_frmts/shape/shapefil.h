@@ -96,6 +96,14 @@ extern "C"
     /*      __declspec(dllexport) must appear before them.                  */
     /* -------------------------------------------------------------------- */
 
+// Cadcorp
+#if defined(_MSC_VER) && !defined(CPL_DISABLE_DLL)
+#ifdef GDAL_COMPILATION
+#define SHAPELIB_DLLEXPORT
+#endif
+#endif
+// Cadcorp
+
 #ifdef SHAPELIB_DLLEXPORT
 #define SHPAPI_CALL __declspec(dllexport)
 #define SHPAPI_CALL1(x) __declspec(dllexport) x
