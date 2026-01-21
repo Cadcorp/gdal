@@ -1921,6 +1921,19 @@ GDALLoadWorldFile( const char *pszFilename, double *padfGeoTransform )
     if ( !papszLines )
         return FALSE;
 
+    // Cadcorp
+    if ( CSLCount(papszLines) == 1 )
+    {
+        // Handle rogue single line world files
+        char **papszLines2 = CSLTokenizeString(papszLines[0]);
+        if (papszLines2)
+        {
+            CSLDestroy(papszLines);
+            papszLines = papszLines2;
+        }
+    }
+    // Cadcorp
+
     double world[6] = { 0.0 };
     // reads the first 6 non-empty lines
     int nLines = 0;
