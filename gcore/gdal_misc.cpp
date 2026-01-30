@@ -1925,7 +1925,7 @@ GDALLoadWorldFile( const char *pszFilename, double *padfGeoTransform )
     if ( CSLCount(papszLines) == 1 )
     {
         // Handle rogue single line world files
-        char **papszLines2 = CSLTokenizeString(papszLines[0]);
+        char **papszLines2 = CSLTokenizeString2(papszLines[0], " \t", CSLT_HONOURSTRINGS);
         if (papszLines2)
         {
             CSLDestroy(papszLines);
